@@ -327,7 +327,7 @@ namespace
                 errs() << "Info: The loop with tag: " << tag_name << " is generating DFG." << "\n";
             }
 
-            if(!L->empty()) // if empty there are no sub loops
+            if(!L->getSubLoops().empty()) // if empty there are no sub loops
                 return false;
 
             unsigned int bb_count = L->getBlocks().size();
