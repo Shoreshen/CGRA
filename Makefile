@@ -49,3 +49,6 @@ commit:
 
 sync: commit
 	git push -u origin main
+
+set_env:
+	./cgrame_env

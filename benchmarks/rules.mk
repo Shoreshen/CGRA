@@ -22,8 +22,8 @@ run: run_mapper
 
 ## FOR BUILDING ##
 
-$(DFG_TARGETS): $(BENCHNAME).bc $(BENCHNAME).tag
-	opt '$(BENCHNAME).bc' -o '/dev/null' -load '$(LLVM_DFG_PLUGIN)' --dfg-out -in-tag-pairs '$(BENCHNAME).tag' $(DFG_FLAGS)
+$(DFG_TARGETS): $(BENCHNAME).bc $(BENCHNAME).tag $(BENCHNAME).ll
+	opt '$(BENCHNAME).bc' -o '/dev/null' -enable-new-pm=0 -load '$(LLVM_DFG_PLUGIN)' --dfg-out -in-tag-pairs '$(BENCHNAME).tag' $(DFG_FLAGS)
 
 %.bc: %.tagged.c
 	clang -emit-llvm -c '$*.tagged.c' -o '$*.bc' $(CFLAGS) $(OPT_DISABLE_FLAGS)

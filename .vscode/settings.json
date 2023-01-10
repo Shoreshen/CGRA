@@ -1,0 +1,24 @@
+{
+    "files.associations": {
+        "iosfwd": "cpp",
+        "sstream": "cpp",
+        "array": "cpp",
+        "hash_map": "cpp",
+        "*.tcc": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp",
+        "iterator": "cpp",
+        "string_view": "cpp",
+        "algorithm": "cpp",
+        "memory": "cpp",
+        "initializer_list": "cpp",
+        "numeric": "cpp",
+        "regex": "cpp",
+        "valarray": "cpp"
+    }
+}

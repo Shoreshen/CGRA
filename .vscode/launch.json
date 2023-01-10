@@ -1,0 +1,90 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: sum",
+            "type": "python",
+            "request": "launch",
+            "program": "./build/script/LoopParser.py",
+            "args": [
+                "benchmarks/microbench/sum/sum.c",
+                "benchmarks/microbench/sum/sum.tagged.c",
+                "benchmarks/microbench/sum/sum.tag"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "(gdb) sum",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/usr/bin/opt",
+            "args": [
+                "./benchmarks/microbench/sum/sum.bc",
+                "-o",
+                "/dev/null",
+                "-enable-new-pm=0",
+                "-load",
+                "./build/lib/libDFG.so",
+                "--dfg-out",
+                "-in-tag-pairs",
+                "./benchmarks/microbench/sum/sum.tag",
+                "-loop-tags",
+                "loop"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [
+                {
+                    "name": "CGRA_ME_ROOTDIR",
+                    "value": "/home/shore/OneDrive/CGRA/"
+                },
+                {
+                    "name": "CGRA_ME_BINDIR",
+                    "value": "/home/shore/OneDrive/CGRA/build/bin/"
+                },
+                {
+                    "name": "CGRA_ME_LIBDIR",
+                    "value": "/home/shore/OneDrive/CGRA/build/lib/"
+                },
+                {
+                    "name": "CGRA_ME_SCRIPTSDIR",
+                    "value": "/home/shore/OneDrive/CGRA/build/script/"
+                },
+                {
+                    "name": "CGRA_ME_BENCHMARKDIR",
+                    "value": "/home/shore/OneDrive/CGRA/benchmarks/"
+                },
+                {
+                    "name": "PATH",
+                    "value": "/home/shore/OneDrive/CGRA/build/script/:/home/shore/OneDrive/CGRA/build/bin/:/home/shore/OneDrive/CGRA/build/script/:/home/shore/OneDrive/CGRA//build/bin/:/home/shore/OneDrive/CGRA//build/script/:/home/shore/OneDrive/CGRA//build/bin/:/home/shore/OneDrive/CGRA//build/script/:/home/shore/OneDrive/CGRA//build/bin/:/home/shore/OneDrive/CGRA//build/script/:/home/shore/OneDrive/CGRA//build/bin/:/home/shore/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl"
+                },
+                {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "/home/shore/OneDrive/CGRA/build/lib/:/home/shore/OneDrive/CGRA/build/lib/:/home/shore/OneDrive/CGRA/build/lib/:/home/shore/OneDrive/CGRA//build/lib/:/home/shore/OneDrive/CGRA//build/lib/"
+                },
+                {
+                    "name": "CGRA_MAPPER",
+                    "value": "cgrame"
+                }
+            ],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "为 gdb 启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "将反汇编风格设置为 Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ],
+}
