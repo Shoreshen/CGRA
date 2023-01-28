@@ -19,6 +19,7 @@
         "initializer_list": "cpp",
         "numeric": "cpp",
         "regex": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "*.def": "cpp"
     }
 }
