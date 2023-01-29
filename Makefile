@@ -46,7 +46,7 @@ endif
 # $<  表示第一个依赖文件
 # $?  表示比目标还要新的依赖文件列表
 # git ===========================================================================================
-commit:clean
+commit:clean_proj
 	git add -A
 	@echo "Please type in commit comment: "; \
 	read comment; \
@@ -66,8 +66,6 @@ PREFIX			= $(PROJ_DIR)/$(proj)
 LLVM_DFG_PLUGIN	= ./build/lib/libDFG.so
 TAG				= $(PREFIX).tag
 TAG_C			= $(PREFIX).tagged.c
-BC_FILE			= $(PREFIX).bc
-LL_FILE			= $(PREFIX).ll
 PWD				= $(shell pwd)
 
 build:$(proj).dot
@@ -77,8 +75,8 @@ view:
 view_sample:
 	# xdot $(PROJ_DIR)/pre-gen-graph_loop.dot &
 
-$(proj).dot: $(TAG) $(BC_FILE) $(LLVM_DFG_PLUGIN)
-	opt '$(BC_FILE)' -o '/dev/null' -enable-new-pm=0 -load '$(LLVM_DFG_PLUGIN)' --dfg-out -in-tag-pairs '$(TAG)' -loop-tags 'loop'
+$(proj).dot: $(TAG) $(PREFIX).bc $(LLVM_DFG_PLUGIN) $(PREFIX).ll
+	opt '$(PREFIX).bc' -o '/dev/null' -enable-new-pm=0 -load '$(LLVM_DFG_PLUGIN)' --dfg-out -in-tag-pairs '$(TAG)' -loop-tags 'loop'
 $(PREFIX).bc: $(TAG) $(TAG_C)
 	clang -emit-llvm -c '$(TAG_C)' -o '$(PREFIX).bc' -O3 -fno-vectorize -fno-slp-vectorize -fno-unroll-loops
 $(PREFIX).ll:$(PREFIX).bc
