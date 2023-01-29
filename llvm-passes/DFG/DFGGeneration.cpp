@@ -36,6 +36,7 @@
 #include "llvm/Support/FileSystem.h"
 #include "llvm/Support/CommandLine.h"
 #include "llvm/Analysis/LoopPass.h"
+#include "llvm/Analysis/LoopInfo.h"
 #include "llvm/IR/Constants.h"
 #include "llvm/IR/Instructions.h"
 #include "llvm/IR/GetElementPtrTypeIterator.h"

@@ -27,3 +27,8 @@ Key members:
 | <a id="OpGraphOp-inputs"></a> `std::vector<OpGraphVal*> input;` | pointing to [`OpGraphVal`](#OpGraphVal)s as the [input](#OpGraphVal-outputs) operand it uses |
 | <a id="OpGraphOp-output"></a> `OpGraphVal* output;`             | pointing to an [`OpGraphVal`](#OpGraphVal) that it [output](#OpGraphVal-input) to            |
 
+## Algorithm
+
+### limitation
+
+1. 

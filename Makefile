@@ -46,7 +46,7 @@ endif
 # $<  表示第一个依赖文件
 # $?  表示比目标还要新的依赖文件列表
 # git ===========================================================================================
-commit:
+commit:clean
 	git add -A
 	@echo "Please type in commit comment: "; \
 	read comment; \
