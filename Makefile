@@ -55,7 +55,7 @@ commit:clean
 sync: commit
 	git push -u origin main
 
-set_env:
+set_env: 
 	./cgrame_env
 # projects ======================================================================================
 proj			= sum
