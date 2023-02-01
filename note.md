@@ -4,7 +4,8 @@
 
 ## Data structure
 
-### <a id="OpGraphVal"></a> OpGraphVal
+### OpGraphVal
+<a id="OpGraphVal"></a> 
 
 1. Representing output resulting from an target [`OpGraphOp`](#OpGraphOp)
 2. It can be used as input by multiple [`OpGraphOp`](#OpGraphOp) other than target [`OpGraphOp`](#OpGraphOp)
@@ -17,7 +18,8 @@ Key members:
 | <a id="OpGraphVal-operand"></a>`std::vector<unsigned int> output_operand;` | Is n'th operand of the [`OpGraphOp`](#OpGraphOp) in [OpGraphVal::outputs](#OpGraphVal-outputs) |
    
  
-### <a id="OpGraphOp"></a> OpGraphOp
+### OpGraphOp
+<a id="OpGraphOp"></a>
 
 1. Representing certain operation cell (e.g add operation), constant or input parameter operations
 2. It can use zero or multiple [`OpGraphVal`](#OpGraphVal) as inputs and always create 1 [`OpGraphVal`](#OpGraphVal) as output
@@ -28,7 +30,8 @@ Key members:
 | <a id="OpGraphOp-inputs"></a> `std::vector<OpGraphVal*> input;` | pointing to [`OpGraphVal`](#OpGraphVal)s as the [input](#OpGraphVal-outputs) operand it uses |
 | <a id="OpGraphOp-output"></a> `OpGraphVal* output;`             | pointing to an [`OpGraphVal`](#OpGraphVal) that it [output](#OpGraphVal-input) to            |
 
-### <a id="OpGraph"></a> OpGraph
+### OpGraph
+<a id="OpGraph"></a>
 
 Container of [`OpGraphOp`](#OpGraphOp) and [`OpGraphVal`](#OpGraphVal)
 
@@ -42,7 +45,8 @@ Key members:
 
 ## Algorithm
 
-### <a id="limitation"></a> limitation
+### limitation
+<a id="limitation"></a> 
 
 1. Will only convert instructions inside a loop
 2. Number of block contained in the loop must be 1
@@ -93,15 +97,29 @@ In summary, the algorithm will only handle one basic block inside the loop.
 
 #### remove phi node
 
-Reason:
+##### Reason/Assumption
+<a id="Assumption"></a>
 
 In [limitation](#limitation) the target loop will contain only one basic block, thus phi can only be created by variables defined outside of the loop, and written in the loop.
 
 Those variables has an initial value when first step into the loop ("const" or "input"), and take the result from in-loop instruction in the later loops
 
-Note:
+##### Step
 
-If a variable is not used 
+For each phi node $\phi$ :
+1. Find the only in-loop instruction operand of $phi$, donate $I$, which is an [`OpGraphVal`](#OpGraphVal)
+2. Erase $\phi$ from $I\text{->output}$ and add $\phi\text{->output->output}$ into $I\text{->output}$
+3. Erase all [`OpGraphOp`](#OpGraphOp) that output only to $\phi$
+4. Erase all [`OpGraphVal`](#OpGraphVal) result from previous step
+5. Erase $phi\text{->output}$ then erase $\phi$
+
+##### Note
+
+Step 3 & 4 will not erase [`OpGraphOp`](#OpGraphOp) result from in-loop instruction.
+
+According to [Assumption](#Assumption) there is only one operand of $\phi$, donate $I$, resulting from in-loop instruction, while all others will be "input" or "const"
+
+After step 2, $\phi$ will be removed from $I\text{->output->output}$, thus it does not only output to $\phi$
 
 #### remove unnecessary leaf nodes
 
