@@ -84,5 +84,5 @@ $(PREFIX).ll:$(PREFIX).bc
 $(TAG) $(TAG_C): $(BENCHMARK_DIR)/$(proj)/$(proj).c
 	$(LOOP_PARSER) $< $(TAG_C) $(TAG)
 clean_proj:
-	@echo
+	-rm *.dot
 	cd $(PROJ_DIR) && make clean
