@@ -123,6 +123,15 @@ After step 2, $\phi$ will be removed from $I\text{->output->output}$, thus it do
 
 #### remove unnecessary leaf nodes
 
+Remove [`OpGraphOp`](#OpGraphOp)s that [`OpGraphOp::output->output`](#OpGraphVal-outputs) has a size of 0.
+
+This indicating that the result value of the [`OpGraphOp`](#OpGraphOp) has no further use for the program.
+
+For target [`OpGraphOp`](#OpGraphOp) $op$, the removing steps:
+1. Remove $op$ from all [`OpGraphVal::output`](#OpGraphVal-outputs)
+2. Remove $op\text{->output}$
+3. Take care of [`OpGraph::inputs`](#OpGraph-inputs) list
+4. Erase $op$
 
 ## question
 
